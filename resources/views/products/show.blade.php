@@ -14,6 +14,8 @@
     <p>{{ $product->price }}</p>
     <p>{{ $product->stock }}</p>
     <p>{{ $product->status }}</p>
+
+    {!! $html !!}
 </body>
 
 </html>
