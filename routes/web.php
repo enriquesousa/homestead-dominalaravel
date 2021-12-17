@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('main');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('main');
+
+// Resolviendo la pagina raiz con un controlador
+Route::get('/', 'MainController@index')->name('main');
 
 // Rutas CRUD products
 Route::get('products', 'ProductController@index')->name('products.index');
