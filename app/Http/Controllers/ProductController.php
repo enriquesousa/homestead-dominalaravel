@@ -32,7 +32,7 @@ class ProductController extends Controller
 
         // Una mejor for de hacerlo
         $product = Product::create(request()->all());
-        return $product;
+        return redirect()->route('products.index');
     }
 
     public function show($product){
@@ -56,12 +56,12 @@ class ProductController extends Controller
         // dd("Estamos en update() {$product}");
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return $product;
+        return redirect()->route('products.index');
     }
 
     public function destroy($product){
         $product = Product::findOrFail($product);
         $product->delete();
-        return $product;
+        return redirect()->route('products.index');
     }
 }
