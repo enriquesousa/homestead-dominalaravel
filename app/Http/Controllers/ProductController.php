@@ -60,16 +60,17 @@ class ProductController extends Controller
     }
 
     public function update($product){
+        dd($product);
         
-         //reglas de validación
-         $rules = [
+        //reglas de validacion
+        $rules = [
             'title' => ['required', 'max:255'],
             'description' => ['required', 'max:1000'],
             'price' => ['required', 'min:1'],
             'stock' => ['required', 'min:0'],
             'status' => ['required', 'in:disponible,No-disponible'],
         ];
-        request()->validate($rules); //si algo falla regresa al formulario anterior con el error
+        request()->validate($rules); //si algo falla regresa al formulario 
 
         // dd($product);
         // dd("Estamos en update() {$product}");

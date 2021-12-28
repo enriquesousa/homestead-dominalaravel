@@ -1,6 +1,3 @@
-{{-- <h4>Estamos en view edit.blade.php</h4>
-{{ dd($product) }} --}}
-
 <h1>Editar un Producto</h1>
 
 <form method="POST" action="{{ route('products.update', ['product' => $product->id]) }}">
