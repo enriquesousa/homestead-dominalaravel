@@ -21,16 +21,14 @@ class ProductController extends Controller
     }
 
     public function store(){
-        // dd('Estamos en metodo store()');
-        // $product = Product::create([
-        //     'title' => request()->title,
-        //     'description' => request()->description,
-        //     'price' => request()->price,
-        //     'stock' => request()->stock,
-        //     'status' => request()->status,
-        // ]);
 
-        // Una mejor for de hacerlo
+        // antes de agregar el producto a la base de datos checamos condición de error si
+        // status este disponible y stock es = 0, nos dispare un mensaje de error
+        if (request()->status == 'disponible' && request()->stock == 0) {
+            session()->flash('error', 'Si esta disponible tiene que tener un stock');
+            return redirect()->back();
+        }
+
         $product = Product::create(request()->all());
         return redirect()->route('products.index');
     }
