@@ -16,11 +16,12 @@ class ProductController extends Controller
     }
 
     public function create(){
-        return 'Esta es la forma para crear un producto desde el Controlador create()';
+        // return 'Esta es la forma para crear un producto desde el Controlador create()';
+        return view('products.create');
     }
 
     public function store(){
-        //
+        dd('Estamos en metodo store()');
     }
 
     public function show($product){

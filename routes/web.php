@@ -20,8 +20,3 @@ Route::match(['put', 'patch'], 'products/{product}', 'ProductController@update')
 Route::delete('products/{product}','ProductController@destroy')->name('products.destroy');
 
 
-
-
-
-
-
