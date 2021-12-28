@@ -21,7 +21,18 @@ class ProductController extends Controller
     }
 
     public function store(){
-        dd('Estamos en metodo store()');
+        // dd('Estamos en metodo store()');
+        // $product = Product::create([
+        //     'title' => request()->title,
+        //     'description' => request()->description,
+        //     'price' => request()->price,
+        //     'stock' => request()->stock,
+        //     'status' => request()->status,
+        // ]);
+
+        // Una mejor for de hacerlo
+        $product = Product::create(request()->all());
+        return $product;
     }
 
     public function show($product){
