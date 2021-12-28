@@ -8,23 +8,23 @@
     @method('PUT')
     <div class="form-row">
         <label>Titulo</label>
-        <input class="form-control" type="text" name="title" value="{{ $product->title }}" required>
+        <input class="form-control" type="text" name="title" value="{{ $product->title }}" >
     </div>
     <div class="form-row">
         <label>Descripción</label>
-        <input class="form-control" type="text" name="description" value="{{ $product->description }}" required>
+        <input class="form-control" type="text" name="description" value="{{ $product->description }}" >
     </div>
     <div class="form-row">
         <label>Precio</label>
-        <input class="form-control" type="number" min="1.00" step="0.01" name="price" value="{{ $product->price }}" required>
+        <input class="form-control" type="number" min="1.00" step="0.01" name="price" value="{{ $product->price }}" >
     </div>
     <div class="form-row">
         <label>Stock</label>
-        <input class="form-control" type="number" min="0" name="stock" value="{{ $product->stock }}" required>
+        <input class="form-control" type="number" min="0" name="stock" value="{{ $product->stock }}" >
     </div>
     <div class="form-row">
         <label>Status</label>
-        <select class="custom-select" name="status" required>
+        <select class="custom-select" name="status" >
             <option {{ $product->status == 'disponible' ? 'selected' : '' }} value="disponible">disponible</option>
             <option {{ $product->status == 'No-disponible' ? 'selected' : '' }} value="No-disponible">No-disponible</option>
         </select>

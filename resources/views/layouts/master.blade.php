@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    {{-- @dump($errors); //para ver los mensajes de validation rules --}}
     @if (session()->has('error'))
          <div class="alert alert-danger">
                {{ session()->get('error') }}

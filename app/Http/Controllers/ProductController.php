@@ -22,6 +22,16 @@ class ProductController extends Controller
 
     public function store(){
 
+        //reglas de validación
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:disponible,No-disponible'],
+        ];
+        request()->validate($rules); //si algo falla regresa al formulario anterior con el error
+
         // antes de agregar el producto a la base de datos checamos condición de error si
         // status este disponible y stock es = 0, nos dispare un mensaje de error
         if (request()->status == 'disponible' && request()->stock == 0) {
@@ -50,6 +60,17 @@ class ProductController extends Controller
     }
 
     public function update($product){
+        
+         //reglas de validación
+         $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:disponible,No-disponible'],
+        ];
+        request()->validate($rules); //si algo falla regresa al formulario anterior con el error
+
         // dd($product);
         // dd("Estamos en update() {$product}");
         $product = Product::findOrFail($product);
