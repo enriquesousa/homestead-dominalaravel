@@ -1,5 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
+
     <h1>Crear un Producto</h1>
     <form method="POST" action="{{ route('products.store') }}">
         @csrf
