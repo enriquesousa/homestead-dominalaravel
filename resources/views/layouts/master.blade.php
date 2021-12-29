@@ -9,13 +9,6 @@
 </head>
 
 <body>
-
-   {{-- @dump($errors); //para ver los mensajes de validation rules --}}
-   @if (session()->has('error'))
-      <div class="alert alert-danger">
-            {{ session()->get('error') }}
-      </div>
-   @endif
    
    @if (session()->has('success'))
       <div class="alert alert-success">
@@ -23,8 +16,7 @@
       </div>
    @endif
 
-   {{-- para ver los mensajes de validation rules --}}
-   {{-- @dump($errors) --}}
+   {{-- @dump($errors); //para ver los mensajes de validation rules --}}
    @if (isset($errors) && $errors->any())
       <div class="alert alert-danger">
             <ul>
@@ -34,7 +26,7 @@
             </ul>
       </div>
    @endif
-   
+
    @yield('content')
 
 </body>

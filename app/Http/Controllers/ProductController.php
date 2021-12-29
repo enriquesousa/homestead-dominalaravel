@@ -36,12 +36,14 @@ class ProductController extends Controller
         // status este disponible y stock es = 0, nos dispare un mensaje de error
         if (request()->status == 'disponible' && request()->stock == 0) {
             session()->flash('error', 'Si esta disponible tiene que tener un stock');
-            return redirect()->back()->withInput(request()->all());
+            return redirect()
+                    ->back()
+                    ->withInput(request()->all())
+                    ->withErrors('Si esta disponible tiene que tener un stock');
         }
 
         $product = Product::create(request()->all());
-        session()->flash('success', "El nuevo producto con id {$product->id} fue creado!");
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue creado");
     }
 
     public function show($product){
@@ -83,12 +85,12 @@ class ProductController extends Controller
         // dd("Estamos en update() {$product}");
         $product = Product::findOrFail($product);
         $product->update(request()->all());
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue editado");
     }
 
     public function destroy($product){
         $product = Product::findOrFail($product);
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue eliminado");
     }
 }
