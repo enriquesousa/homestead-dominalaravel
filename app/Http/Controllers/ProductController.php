@@ -36,7 +36,7 @@ class ProductController extends Controller
         // status este disponible y stock es = 0, nos dispare un mensaje de error
         if (request()->status == 'disponible' && request()->stock == 0) {
             session()->flash('error', 'Si esta disponible tiene que tener un stock');
-            return redirect()->back();
+            return redirect()->back()->withInput(request()->all());
         }
 
         $product = Product::create(request()->all());
@@ -60,9 +60,8 @@ class ProductController extends Controller
     }
 
     public function update($product){
-        dd($product);
-        
-        //reglas de validacion
+
+        //reglas de validación
         $rules = [
             'title' => ['required', 'max:255'],
             'description' => ['required', 'max:1000'],
@@ -71,6 +70,13 @@ class ProductController extends Controller
             'status' => ['required', 'in:disponible,No-disponible'],
         ];
         request()->validate($rules); //si algo falla regresa al formulario 
+
+        // antes de agregar el producto a la base de datos checamos condición de error si
+        // status este disponible y stock es = 0, nos dispare un mensaje de error
+        if (request()->status == 'disponible' && request()->stock == 0) {
+            session()->flash('error', 'Si esta disponible tiene que tener un stock');
+            return redirect()->back()->withInput(request()->all());
+        }
 
         // dd($product);
         // dd("Estamos en update() {$product}");
