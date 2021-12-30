@@ -50,23 +50,23 @@ class ProductController extends Controller
         return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue creado");
     }
 
-    public function show($product){
-        $product = Product::findOrFail($product);
+    public function show(Product $product){
+        // $product = Product::findOrFail($product); // ya no es necesaria con la inyeccion implicita Product
         return view('products.show')->with([
             'product' => $product,
             'html' => "<h2>Subtitulo</h2>",
         ]);
     }
 
-    public function edit($product){
+    public function edit(Product $product){
         // return "Mostrando la forma para editar producto con id {$product} desde Controlador edit($product)";
         // dd($product);
         return view('products.edit')->with([
-            'product' => Product::findOrFail($product),
+            'product' => $product,
          ]);
     }
 
-    public function update($product){
+    public function update(Product $product){
 
         //reglas de validación
         $rules = [
@@ -87,13 +87,13 @@ class ProductController extends Controller
 
         // dd($product);
         // dd("Estamos en update() {$product}");
-        $product = Product::findOrFail($product);
+        // $product = Product::findOrFail($product);
         $product->update(request()->all());
         return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue editado");
     }
 
-    public function destroy($product){
-        $product = Product::findOrFail($product);
+    public function destroy(Product $product){
+        // $product = Product::findOrFail($product);
         $product->delete();
         return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue eliminado");
     }
