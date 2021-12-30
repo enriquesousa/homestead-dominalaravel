@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -24,29 +25,8 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(){
-
-        //reglas de validación
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:disponible,No-disponible'],
-        ];
-        request()->validate($rules); //si algo falla regresa al formulario anterior con el error
-
-        // antes de agregar el producto a la base de datos checamos condición de error si
-        // status este disponible y stock es = 0, nos dispare un mensaje de error
-        if (request()->status == 'disponible' && request()->stock == 0) {
-            session()->flash('error', 'Si esta disponible tiene que tener un stock');
-            return redirect()
-                    ->back()
-                    ->withInput(request()->all())
-                    ->withErrors('Si esta disponible tiene que tener un stock');
-        }
-
-        $product = Product::create(request()->all());
+    public function store(ProductRequest $request){
+        $product = Product::create($request->validated());
         return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue creado");
     }
 
@@ -66,29 +46,8 @@ class ProductController extends Controller
          ]);
     }
 
-    public function update(Product $product){
-
-        //reglas de validación
-        $rules = [
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price' => ['required', 'min:1'],
-            'stock' => ['required', 'min:0'],
-            'status' => ['required', 'in:disponible,No-disponible'],
-        ];
-        request()->validate($rules); //si algo falla regresa al formulario 
-
-        // antes de agregar el producto a la base de datos checamos condición de error si
-        // status este disponible y stock es = 0, nos dispare un mensaje de error
-        if (request()->status == 'disponible' && request()->stock == 0) {
-            session()->flash('error', 'Si esta disponible tiene que tener un stock');
-            return redirect()->back()->withInput(request()->all());
-        }
-
-        // dd($product);
-        // dd("Estamos en update() {$product}");
-        // $product = Product::findOrFail($product);
-        $product->update(request()->all());
+    public function update(ProductRequest $request, Product $product){
+        $product->update($request->validated());
         return redirect()->route('products.index')->withSuccess("El producto con id  {$product->id} fue editado");
     }
 
