@@ -21,6 +21,7 @@
 </head>
 <body>
     <div id="app">
+        
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -33,7 +34,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -99,6 +102,7 @@
                 
             </div>
         </main>
+
     </div>
 </body>
 </html>
